@@ -1,0 +1,54 @@
+
+.footer-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-menu li {
+    margin-bottom: 10px;
+}
+
+.footer-logo-ds img {
+    max-width: 100px;
+    margin: 10px auto;
+}
+
+.author-social a {
+    margin: 0 5px;
+    color: #eeeef1;
+}
+
+.widget-title {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.widget_mailchimp input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.search-submit {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.page_copyright {
+    background-color: #343a40;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.page_copyright p {
+    margin: 0;
+    font-size: 14px;
+}
+.page_footer {
+    background-color: #595a5c;
+    padding: 20px 0;
+    text-align: center;
+}
