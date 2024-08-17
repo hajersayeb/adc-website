@@ -1,0 +1,39 @@
+/* SignUp.css */
+.container {
+    margin-top:80px;
+    margin-bottom: 80px;
+}
+
+.rec {
+    padding: 20px;
+}
+
+.text3 {
+    margin-top: 50px;
+}
+
+.cond {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.butt3, .butt2 {
+    width: 200px;
+    height:50px;
+}
+.text2 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.text2 a {
+    text-decoration: underline;
+    color: #007bff;
+}
+
+.text2 a:hover {
+    color: #0056b3;
+    text-decoration: none;
+}

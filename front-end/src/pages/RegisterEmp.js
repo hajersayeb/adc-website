@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
-import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
-import '../pages/styles/Register.css';
 import AuthService from "../services/auth-service";
-
+import { isEmail } from "validator";
+import '../pages/styles/RegisterEmp.css';
+// Validation functions
 const required = value => {
   if (!value) {
     return (
@@ -17,21 +16,11 @@ const required = value => {
   }
 };
 
-const email = value => {
+const vemail = value => {
   if (!isEmail(value)) {
     return (
       <div className="alert alert-danger" role="alert">
         This is not a valid email.
-      </div>
-    );
-  }
-};
-
-const vusername = value => {
-  if (value.length < 3 || value.length > 20) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        The username must be between 3 and 20 characters.
       </div>
     );
   }
@@ -51,75 +40,30 @@ export default class Register extends Component {
   constructor(props) {
     super(props);
     this.handleRegister = this.handleRegister.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this);
-    this.onChangeFullName = this.onChangeFullName.bind(this);
-    this.onChangeCivilite = this.onChangeCivilite.bind(this);
-    this.onChangeDateNaissance = this.onChangeDateNaissance.bind(this);
-    this.onChangeGouvernorat = this.onChangeGouvernorat.bind(this);
+    this.onChange = this.onChange.bind(this);
 
     this.state = {
-      username: "",
       email: "",
+      fullName: "",
       password: "",
       confirmPassword: "",
-      fullName: "",
-      civilite: "",
-      dateNaissance: "",
-      gouvernorat: "",
+      companyName: "",
+      website: "",
+      phone: "",
+      location: "",
+      logo: null,
+      companyDescription: "",
+      uniqueId: "",
+      sector: "",
+      termsAccepted: false,
       successful: false,
       message: ""
     };
   }
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    });
-  }
-
-  onChangeEmail(e) {
-    this.setState({
-      email: e.target.value
-    });
-  }
-
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
-
-  onChangeConfirmPassword(e) {
-    this.setState({
-      confirmPassword: e.target.value
-    });
-  }
-
-  onChangeFullName(e) {
-    this.setState({
-      fullName: e.target.value
-    });
-  }
-
-  onChangeCivilite(e) {
-    this.setState({
-      civilite: e.target.value
-    });
-  }
-
-  onChangeDateNaissance(e) {
-    this.setState({
-      dateNaissance: e.target.value
-    });
-  }
-
-  onChangeGouvernorat(e) {
-    this.setState({
-      gouvernorat: e.target.value
-    });
+  onChange(e) {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   }
 
   handleRegister(e) {
@@ -133,15 +77,21 @@ export default class Register extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.register(
-        this.state.username,
-        this.state.email,
-        this.state.password,
-        this.state.fullName,
-        this.state.civilite,
-        this.state.dateNaissance,
-        this.state.gouvernorat
-      ).then(
+      AuthService.register({
+        email: this.state.email,
+        fullName: this.state.fullName,
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword,
+        companyName: this.state.companyName,
+        website: this.state.website,
+        phone: this.state.phone,
+        location: this.state.location,
+        logo: this.state.logo,
+        companyDescription: this.state.companyDescription,
+        uniqueId: this.state.uniqueId,
+        sector: this.state.sector,
+        termsAccepted: this.state.termsAccepted
+      }).then(
         response => {
           this.setState({
             message: response.data.message,
@@ -169,6 +119,7 @@ export default class Register extends Component {
     return (
       <div className="col-md-12">
         <div className="card card-container">
+            <h3>Create your space employer here</h3>
           <Form
             onSubmit={this.handleRegister}
             ref={c => {
@@ -178,44 +129,27 @@ export default class Register extends Component {
             {!this.state.successful && (
               <div>
                 <div className="form-group">
-                  <label htmlFor="fullName">Nom & Prénom</label>
-                  <Input
-  type="text"
-  className="form-control"
-  name="username"
-  value={this.state.username}
-  onChange={this.onChangeUsername}
-  validations={[required, vusername]}
-/>
-
-                </div>
-
-                <div className="form-group">
                   <label htmlFor="email">Email *</label>
                   <Input
                     type="text"
                     className="form-control"
                     name="email"
                     value={this.state.email}
-                    onChange={this.onChangeEmail}
-                    validations={[required, email]}
+                    onChange={this.onChange}
+                    validations={[required, vemail]}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="civilite">Civilité *</label>
-                  <Select
+                  <label htmlFor="fullName">Nom & Prénom: *</label>
+                  <Input
+                    type="text"
                     className="form-control"
-                    name="civilite"
-                    value={this.state.civilite}
-                    onChange={this.onChangeCivilite}
+                    name="fullName"
+                    value={this.state.fullName}
+                    onChange={this.onChange}
                     validations={[required]}
-                  >
-                    <option value="">Sélectionnez Civilité</option>
-                    <option value="Mr">Mr</option>
-                    <option value="Mme">Mme</option>
-                    <option value="Mlle">Mlle</option>
-                  </Select>
+                  />
                 </div>
 
                 <div className="form-group">
@@ -225,7 +159,7 @@ export default class Register extends Component {
                     className="form-control"
                     name="password"
                     value={this.state.password}
-                    onChange={this.onChangePassword}
+                    onChange={this.onChange}
                     validations={[required, vpassword]}
                   />
                 </div>
@@ -237,36 +171,107 @@ export default class Register extends Component {
                     className="form-control"
                     name="confirmPassword"
                     value={this.state.confirmPassword}
-                    onChange={this.onChangeConfirmPassword}
+                    onChange={this.onChange}
                     validations={[required]}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="dateNaissance">Date de Naissance *</label>
+                  <label htmlFor="companyName">Nom de l'entreprise *</label>
                   <Input
-                    type="date"
+                    type="text"
                     className="form-control"
-                    name="dateNaissance"
-                    value={this.state.dateNaissance}
-                    onChange={this.onChangeDateNaissance}
+                    name="companyName"
+                    value={this.state.companyName}
+                    onChange={this.onChange}
                     validations={[required]}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="gouvernorat">Gouvernorat *</label>
-                  <Select
+                  <label htmlFor="website">Site Web</label>
+                  <Input
+                    type="text"
                     className="form-control"
-                    name="gouvernorat"
-                    value={this.state.gouvernorat}
-                    onChange={this.onChangeGouvernorat}
+                    name="website"
+                    value={this.state.website}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="phone">Téléphone *</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="phone"
+                    value={this.state.phone}
+                    onChange={this.onChange}
+                    validations={[required]}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="location">Emplacement (Adresse) *</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="location"
+                    value={this.state.location}
+                    onChange={this.onChange}
+                    validations={[required]}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="logo">Logo</label>
+                  <Input
+                    type="file"
+                    className="form-control"
+                    name="logo"
+                    onChange={e => this.setState({ logo: e.target.files[0] })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="companyDescription">Description de l'entreprise</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="companyDescription"
+                    value={this.state.companyDescription}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="uniqueId">Identifiant Unique (RC/ RNE / MF) *</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="uniqueId"
+                    value={this.state.uniqueId}
+                    onChange={this.onChange}
+                    validations={[required]}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="sector">Secteur d'activité *</label>
+                  <select
+                    className="form-control"
+                    name="sector"
+                    value={this.state.sector}
+                    onChange={this.onChange}
                     validations={[required]}
                   >
-                    <option value="">Sélectionnez Gouvernorat</option>
-                    <option value="Tunis">Tunis</option>
-                    <option value="Ariana">Ariana</option>
-                  </Select>
+                    <option value="">Tous secteurs</option>
+                    <option value="IT">IT</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Education">Education</option>
+                    <option value="Health">Health</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
 
                 <div className="form-group">

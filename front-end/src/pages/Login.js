@@ -6,6 +6,7 @@ import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth-service";
 import { crudRouter } from '../crud-router';
 import '../pages/styles/Login.css';
+
 const required = value => {
   if (!value) {
     return (
@@ -82,75 +83,82 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container" >
-        <div className="row" >
-          <h1 className="titre1">Connexion</h1>
-          <Form
-            onSubmit={this.handleLogin}
-            ref={c => {
-              this.form = c;
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="username">Nom d'utilisateur</label>
-              <Input
-                type="text"
-                className="form-control"
-                name="username"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
-                validations={[required]}
-                autoComplete="username"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Mot de passe</label>
-              <Input
-                type="password"
-                className="form-control"
-                name="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-                validations={[required]}
-                autoComplete="current-password"
-              />
-            </div>
-
-            <div className="form-group">
-              <button
-                className="btn btn-primary btn-block"
-                disabled={this.state.loading}
+          <div className="container">
+            <div className="row">
+              <div className="col-6 connexion">
+              <h1 className="titre1">Connexion</h1>
+              <Form
+                onSubmit={this.handleLogin}
+                ref={c => {
+                  this.form = c;
+                }}
               >
-                {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Connexion</span>
-              </button>
-            </div>
-
-            {this.state.message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {this.state.message}
+                <div className="form-group">
+                  <label htmlFor="username">Nom d'utilisateur</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="username"
+                    value={this.state.username}
+                    onChange={this.onChangeUsername}
+                    validations={[required]}
+                    autoComplete="username"
+                  />
                 </div>
-              </div>
-            )}
 
-            <CheckButton
-              style={{ display: "none" }}
-              ref={c => {
-                this.checkBtn = c;
-              }}
-            />
-             <div className="form-group text-center">
-              <p>
-                <Link to="/register">S'inscrire</Link> | 
-                <Link to="/forgot-password">Mot de passe oublié ?</Link>
-              </p>
-            </div>
+                <div className="form-group">
+                  <label htmlFor="password">Mot de passe</label>
+                  <Input
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChangePassword}
+                    validations={[required]}
+                    autoComplete="current-password"
+                  />
+                </div>
 
-          </Form>
+                <div className="form-group">
+                  <button
+                    className="btn btn-primary butt1 "
+                    disabled={this.state.loading}
+                  >
+                    {this.state.loading && (
+                      <span className="spinner-border "></span>
+                    )}
+                    <span>Connexion</span>
+                  </button>
+                </div>
+
+                {this.state.message && (
+                  <div className="form-group">
+                    <div className="alert alert-danger" role="alert">
+                      {this.state.message}
+                    </div>
+                  </div>
+                )}
+
+                <CheckButton
+                  style={{ display: "none" }}
+                  ref={c => {
+                    this.checkBtn = c;
+                  }}
+                />
+
+                <div className="form-group text-center">
+                  <p>
+                    <Link to="/signUp">S'inscrire</Link> | 
+                    <Link to="/forgot-password">Mot de passe oublié ?</Link>
+                  </p>
+                </div>
+              </Form>
+          </div>
+       
+        <div className="col-6 connexion2">
+          <p className="text1">Se connecter via les réseaux sociaux</p>
+          <button className="btn btn-primary">se connecter avec Google</button>
+        </div>
         </div>
       </div>
     );
