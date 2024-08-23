@@ -19,7 +19,7 @@ verifyToken = (req, res, next) => {
                   message: "Unauthorized!",
                 });
               }
-              req.userId = decoded.id;
+              req.UserId = decoded.id;
               next();
             });
 };
@@ -54,8 +54,70 @@ isAdmin = (req, res, next) => {
     );
   });
 };
+isCondidat = (req, res, next) => {
+  User.findById(req.userId).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    Role.find(
+      {
+        _id: { $in: user.roles }
+      },
+      (err, roles) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+
+        for (let i = 0; i < roles.length; i++) {
+          if (roles[i].name === "condidat") {
+            next();
+            return;
+          }
+        }
+
+        res.status(403).send({ message: "Require Condidat Role!" });
+        return;
+      }
+    );
+  });
+};
+isEmployeur = (req, res, next) => {
+  User.findById(req.userId).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    Role.find(
+      {
+        _id: { $in: user.roles }
+      },
+      (err, roles) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+
+        for (let i = 0; i < roles.length; i++) {
+          if (roles[i].name === "employeur") {
+            next();
+            return;
+          }
+        }
+
+        res.status(403).send({ message: "Require Employeur Role!" });
+        return;
+      }
+    );
+  });
+};
 const authJwt = {
   verifyToken,
-  isAdmin
+  isAdmin,
+  isCondidat,
+  isEmployeur
 };
 module.exports = authJwt;

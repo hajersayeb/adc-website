@@ -1,26 +1,128 @@
+
 .connexion {
-margin-top:100px;
-margin-bottom: 100px;
+  background-color: #f2f4f7;
+  padding: 80px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.titre1{
-  text-align: center;
-  font-size: 30px;
-  font-weight: bold;
-  color: rgba(6, 60, 177, 0.842);
+
+.connexion2 {
+  background-color: #0866ff;
+  padding: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 }
-.form-group{
-  margin-top: 30px;
+
+.header_logo_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
-Input{
+
+.logo1 {
+  width: 150px;
+}
+
+.form1 {
+  width: 100%;
+}
+
+.form-group {
+  margin-top: 20px;
+}
+
+input {
   margin-top: 10px;
   height: 50px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
-.connexion2{
-  margin-top:230px;
-  margin-bottom: 100px;
-  text-align: center;
-  }
-  .text1{
-    margin-bottom: 30px;
-  }
-  
+
+.butt1 {
+  margin-top: 20px;
+}
+
+.titre1 {
+  text-align: left;
+  position: relative;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.titre1::after {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 2px;
+  background-color: blue;
+  position: absolute;
+  bottom: -5px;
+}
+label{
+  margin-top: 20px;
+}
+input{
+  margin-top: 20px;
+}
+.lab1{
+  margin-top: 50px;
+
+}
+.form-group.text-center .btn {
+  margin: 0 60px;       /* Espace horizontal entre les boutons */
+  padding: 10px 30px;   /* Réduit l'espace vertical à l'intérieur des boutons */
+  font-size: 16px;      /* Taille du texte */
+  width: 150px;         /* Largeur fixe pour les boutons */
+  height: 40px;         /* Hauteur réduite pour les boutons */
+  background-color: #0866ff; /* Couleur de fond pour contraste */
+  border: none;         /* Retirer la bordure */
+  border-radius: 5px;   /* Arrondir les bords des boutons */
+  display: inline-block; /* Assure que le bouton respecte les dimensions */
+}
+
+.form-group.text-center .btn a {
+  color: white;         /* Couleur du texte en blanc */
+  text-decoration: none; /* Retire le soulignement des liens */
+  display:flex;        /* Assure que le lien prend toute la taille du bouton */
+  line-height: 20px;     /* Centrer verticalement le texte à l'intérieur */
+}
+.form-group.text-center p {
+  margin-top: 30px; /* Espace supérieur au-dessus du lien "Create an account" */
+  margin-bottom: 40px;
+}
+.form-group.text-center p a {
+  color: black;          /* Couleur du texte en noir pour les liens */
+  text-decoration: none; /* Retire le soulignement par défaut des liens */
+}
+
+.form-group.text-center p a:hover {
+  text-decoration: underline; /* Ajoute une sous-ligne au survol (optionnel) */
+}
+.input-container {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  transform: translateY(-50%);
+  color: #000000; /* Couleur de l'icône, ajustez si nécessaire */
+}
+
+.form-control {
+  padding-left: 90px; /* Assure que le texte n'entre pas en collision avec l'icône */
+}
+/* Espacement entre l'icône et le texte */
+.btn-icon {
+  margin-right:10px;            /* Espacement entre l'icône et le texte */
+  color: white;                  /* Assure que l'icône est visible sur le fond du bouton */
+}
+

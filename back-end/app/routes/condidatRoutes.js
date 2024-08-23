@@ -1,6 +1,7 @@
 
+
 const authJwt = require("../auth/authJwt");
-const controller = require("../controllers/userControllers");
+const controller = require("../controllers/condidatControllers");
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -13,7 +14,14 @@ module.exports = function(app) {
 
   app.get("/api/test/all", controller.allAccess);
 
-  app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
+  app.get("/api/test/condidat", [authJwt.verifyToken], controller.condidatBoard);
+
+  app.get(
+    "/api/test/employeur",
+    [authJwt.verifyToken, authJwt.isEmployeur],
+    controller.employeurBoard
+  );
+
   app.get(
     "/api/test/admin",
     [authJwt.verifyToken, authJwt.isAdmin],

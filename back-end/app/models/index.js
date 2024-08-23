@@ -4,8 +4,10 @@ mongoose.Promise = global.Promise;
 const db = {};
 db.mongoose = mongoose
 db.url = dbConfig.url;
-db.users = require ("./users");
+db.condidat = require ("./condidat");
+db.employeur = require ("./employeur");
+db.admin = require ("./admin");
 db.roles = require ("./roles");
 //identify roles her
-db.ROLES = ["user"];
+db.ROLES = ["condidat", "employeur", "condidat"];
 module.exports = db;

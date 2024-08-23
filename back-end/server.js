@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 // routes
 //calling the router
 require("./app/routes/authRoutes.js")(app);
-require("./app/routes/userRoutes.js")(app);
+require("./app/routes/condidatRoutes.js")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
@@ -43,12 +43,12 @@ function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       new Role({
-        name: "user"
+        name: "condidat"
       }).save(err => {
         if (err) {
           console.log("error", err);
         }
-        console.log("added 'user' to roles collection");
+        console.log("added 'condidat' to roles collection");
       })
       new Role({
         name: "admin"
@@ -57,6 +57,14 @@ function initial() {
           console.log("error", err);
         }
         console.log("added 'admin' to roles collection");
+      });
+      new Role({
+        name: "employeur"
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+        console.log("added 'employeur' to roles collection");
       });
     }
   });

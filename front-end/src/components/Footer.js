@@ -1,4 +1,4 @@
-import {  Outlet } from "react-router-dom"
+
 import 'bootstrap/dist/css/bootstrap.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faGoogle } from '@fortawesome/free-brands-svg-icons';
@@ -74,7 +74,6 @@ const Footer = () => {
                 </div>
             </div>
         </footer>
-        <Outlet />
         </>
     );
 };

@@ -2,23 +2,19 @@ const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.users;
 const Role = db.roles;
-
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
-
 exports.signup = (req, res) => {
   const user = new User({
     username: req.body.username,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8)
   });
-
   user.save((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-
     if (req.body.roles) {
       Role.find(
         {
@@ -29,14 +25,12 @@ exports.signup = (req, res) => {
             res.status(500).send({ message: err });
             return;
           }
-
           user.roles = roles.map(role => role._id);
           user.save(err => {
             if (err) {
               res.status(500).send({ message: err });
               return;
             }
-
             res.send({ message: "User was registered successfully!" });
           });
         }
@@ -62,7 +56,6 @@ exports.signup = (req, res) => {
     }
   });
 };
-
 exports.signin = (req, res) => {
   User.findOne({
     username: req.body.username
@@ -73,7 +66,6 @@ exports.signin = (req, res) => {
         res.status(500).send({ message: err });
         return;
       }
-
       if (!user) {
         return res.status(404).send({ message: "bonjour." });
       }

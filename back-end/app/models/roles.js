@@ -5,6 +5,7 @@ const Role = mongoose.model(
         name:{
             type:String,
             unique:true,
+            required: true,
         }
     })
 );
